@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script sends SIGTERM to 7-highlander
+
+for pid in /proc/[0-9]*; do
+    pid=${pid##*/}
+
+    if [ -r "/proc/$pid/comm" ]; then
+        name=$(cat "/proc/$pid/comm")
+    
+        if [ "$name" = "7-highlander" ]; then
+            kill -SIGTERM "$pid"
+        fi
+    fi
+done
+
+

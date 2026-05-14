@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script stops the 4-to_infinity_and_beyond process
+
+for pid in /proc/[0-9]*; do
+    pid=${pid##*/} 
+ 
+    if [ -r "/proc/$pid/comm" ]; then
+        name=$(cat "/proc/$pid/comm")
+        if [ "$name" = "4-to_infinity_and_beyond" ]; then
+            kill "$pid"
+        fi
+    fi
+done
+
+
+
